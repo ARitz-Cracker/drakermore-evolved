@@ -226,12 +226,15 @@ id = "tooltipfix"
 repo = "curseforge"
 channel = "release"
 
+# Website with server
 [[mod_list]]
 id = "bluemap"
 repo = "modrinth"
 channel = "release"
 
-[[mod_list]]
-id = "distanthorizons"
-repo = "modrinth"
-channel = "alpha"
+# Allows you to see very very far away
+# Removed until proper multiplayer support is added (likely next update)
+# [[mod_list]]
+# id = "distanthorizons"
+# repo = "modrinth"
+# channel = "alpha"
