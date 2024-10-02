@@ -1,0 +1,18 @@
+[workspace]
+resolver = "2"
+members = [
+  "drakermore-server"
+]
+
+[workspace.dependencies]
+is_none_or = "0.1.0"          # REMOVE THIS WHEN RUSTC 1.82.0 IS RELEASED!!!
+futures = "0.3.30"
+log = "0.4.22"
+lazy-regex = "3.3.0"
+thiserror = "1.0.64"
+serde = "1.0.210"
+axum = "0.7.7"
+
+# CLI tools
+bpaf = {version = "0.9.14", features = ["bpaf_derive"]}
+color-eyre = "0.6.3" 

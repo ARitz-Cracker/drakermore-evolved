@@ -1,0 +1,21 @@
+[package]
+name = "drakermore-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lazy-regex = { workspace = true }
+thiserror = { workspace = true }
+log = { workspace = true }
+futures = { workspace = true }
+axum = { workspace = true }
+
+# Creates for bin feature
+bpaf = { workspace = true }
+
+[features]
+#bin = ["bpaf"]
+
+[[bin]]
+name = "umbrasync"
+path = "src/bin.rs"

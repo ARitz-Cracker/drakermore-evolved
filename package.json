@@ -1,0 +1,13 @@
+{
+	"name": "@aritz-cracker/drakermore-workspace",
+	"version": "1.0.0",
+	"scripts": {
+		"build": "echo \"TODO: build all packages\" && exit 1",
+		"test": "echo \"TODO\" && exit 1",
+		"release": "echo \"TODO\" && exit 1"
+	},
+	"private": true,
+	"workspaces": [
+		"drakermore-scraper"
+	]
+}

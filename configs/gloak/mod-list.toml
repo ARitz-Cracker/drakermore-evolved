@@ -1,0 +1,237 @@
+# This config file is used by the scraper to gather the mods to download
+minecraft_version = "1.20.1"
+
+[[mod_list]]
+# Eureka! (Airship + Seaship mod)
+# https://wiki.valkyrienskies.org/wiki/Eureka
+id = "eureka-ships"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+# Create Mod
+id = "create-fabric"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+# Create: Interactive (Allows for everything on create contraptions and trains to be fully intractable)
+# Might remove this due to bugs
+id = "create-interactive"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+# Create Crafts & Additions (Various additions to create, new foods, parts, etc)
+id = "createaddition"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+# Create: Steam 'n' Rails (More decorative blocks for trains and railways)
+id = "create-steam-n-rails"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Create Big Cannons (Big artillery gun go boom)
+id = "create-big-cannons"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Carry On (Allows you to move filled chests)
+id = "carry-on"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Chat Heads (Player heads show next to name in game chat)
+id = "chat-heads"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+# Chunk Loaders (Allows for things to happen, e.g. farms, while a player is not in an area)
+id = "chunk-loaders"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Creeper Overhaul (Adds biome-specific creepers)
+id = "creeper-overhaul"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Container Searcher (Allows you to search for items in nearby chests you've seen)
+id = "csearcher"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+# Dye all the things (Allows you to apply dye to all armour)
+id = "dyeallthethings"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Earth2Java (more wild animal variants)
+id = "earth2java"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# EveryCompat - Wood Good (Makes all wood types compatible with all crafting recipies)
+id = "every-compat"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Rechiseled (More patterns and forms for all the various stone brick types)
+id = "rechiseled"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Gravestones (Inventory goes in a grave stone instead of dropping all items)
+id = "pneumono_gravestones"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+# Infinity buttons (moar buttons!!!!)
+id = "infinitybuttons"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+# Joy of painting (create your own paintings)
+id = "joy-of-painting"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# TIS3D (For nerds)
+id = "tis-3d"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+# Symbol chat (Adds emojis to chat messages)
+id = "symbol-chat"
+repo = "modrinth"
+channel = "release"
+
+# Macaw's decor...
+[[mod_list]]
+id = "macaws-bridges"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+id = "macaws-paths-and-pavings"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+id = "macaws-doors"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+id = "macaws-fences-and-walls"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+id = "macaws-furniture"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+id = "macaws-lights-and-lamps"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+id = "macaws-roofs"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+id = "macaws-trapdoors"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+id = "macaws-windows"
+repo = "curseforge"
+channel = "beta"
+
+# Technical + Mod dependencies
+[[mod_list]]
+id = "fabric-api"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+id = "indium"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "sodium"
+repo = "modrinth"
+channel = "release"
+
+# Just Enough Items (Recipie book for all items)
+[[mod_list]]
+id = "jei"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+id = "modmenu"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+id = "completeconfig"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+id = "valkyrien-skies"
+repo = "curseforge"
+channel = "beta"
+
+[[mod_list]]
+id = "ferritecore-fabric"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+id = "ding"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "patchouli-fabric"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+id = "tooltipfix"
+repo = "curseforge"
+channel = "release"
+
+[[mod_list]]
+id = "bluemap"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "distanthorizons"
+repo = "modrinth"
+channel = "alpha"
