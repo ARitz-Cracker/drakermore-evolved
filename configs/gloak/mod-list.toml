@@ -1,5 +1,32 @@
 # This config file is used by the scraper to gather the mods to download
+name = "Gloak Mod pack for The Commune"
+pack_author = "ARitz Cracker"
+pack_version = "1.0.0"
 minecraft_version = "1.20.1"
+fabric_loader_version = "0.16.5"
+
+[[mmc_pack_components]]
+dependency_only = true
+uid = "org.lwjgl3"
+version = "3.3.4"
+
+[[mmc_pack_components]]
+dependency_only = false
+uid = "net.minecraft"
+version = "1.20.1"
+
+[[mmc_pack_components]]
+dependency_only = true
+uid = "net.fabricmc.intermediary"
+version = "1.20.1"
+
+[[mmc_pack_components]]
+dependency_only = false
+uid = "net.fabricmc.fabric-loader"
+version = "0.16.5"
+
+
+#packwiz:1.1.0
 
 [[mod_list]]
 # Eureka! (Airship + Seaship mod)
