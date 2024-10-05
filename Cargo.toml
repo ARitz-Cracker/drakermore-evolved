@@ -9,7 +9,7 @@ log = "0.4.22"
 lazy-regex = "3.3.0"
 thiserror = "1.0.64"
 serde = { version = "1.0.210", features = ["derive"] }
-axum = "0.7.7"
+axum = { version = "0.7.7", features = ["macros"] }
 tracing-subscriber = "0.3.18"
 tokio = { version = "1.40.0", features = ["rt", "net", "macros", "fs"] }
 toml = "0.8.19"
@@ -18,7 +18,12 @@ zip = "2.2.0"
 bytes = "1.7.2"
 anyhow = "1.0.89"
 url_encor = "1.0.2"
-
+serde_json = "1.0.128"
+serde_repr = "0.1"
+sha2 = "0.10.8"
+hex = "0.4.3"
+tracing = "0.1.40"
+crab_nbt = { version = "0.2.3", features = ["serde"] }
 
 # CLI tools
 bpaf = { version = "0.9.14", features = ["bpaf_derive"] }

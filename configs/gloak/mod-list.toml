@@ -5,10 +5,14 @@ pack_version = "1.0.0"
 minecraft_version = "1.20.1"
 fabric_loader_version = "0.16.5"
 
+[[minecraft_servers]]
+name = "Test IP"
+ip = "clood-server.local"
+
 [[mmc_pack_components]]
 dependency_only = true
 uid = "org.lwjgl3"
-version = "3.3.4"
+version = "3.3.1"
 
 [[mmc_pack_components]]
 dependency_only = false
@@ -44,8 +48,8 @@ channel = "beta"
 [[mod_list]]
 # Create: Interactive (Allows for everything on create contraptions and trains to be fully intractable)
 # Might remove this due to bugs
-id = "create-interactive"
-repo = "curseforge"
+id = "interactive"
+repo = "modrinth"
 channel = "beta"
 
 [[mod_list]]
@@ -81,13 +85,13 @@ channel = "release"
 [[mod_list]]
 # Chunk Loaders (Allows for things to happen, e.g. farms, while a player is not in an area)
 id = "chunk-loaders"
-repo = "curseforge"
+repo = "modrinth"
 channel = "release"
 
 [[mod_list]]
 # Creeper Overhaul (Adds biome-specific creepers)
 id = "creeper-overhaul"
-repo = "curseforge"
+repo = "modrinth"
 channel = "release"
 
 [[mod_list]]
@@ -253,11 +257,75 @@ id = "tooltipfix"
 repo = "curseforge"
 channel = "release"
 
+# Dependencies for chunk loaders
+[[mod_list]]
+id = "supermartijn642s-core-lib"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "supermartijn642s-config-lib"
+repo = "modrinth"
+channel = "release"
+
+# Dependencies for creeper overhaul
+[[mod_list]]
+id = "geckolib"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "resourceful-config"
+repo = "modrinth"
+channel = "release"
+
+# Dependencies for various things
+[[mod_list]]
+id = "ichunutil"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "architectury-api"
+repo = "modrinth"
+channel = "release"
+
+# Dependency for everycompat
+[[mod_list]]
+id = "moonlight"
+repo = "modrinth"
+channel = "release"
+
+# Dependency for gravestone
+[[mod_list]]
+id = "pneumono_core"
+repo = "modrinth"
+channel = "release"
+
+# Dependencies for Rechiseled
+[[mod_list]]
+id = "fusion-connected-textures"
+repo = "modrinth"
+channel = "release"
+
+# Dependencies TIS3D
+[[mod_list]]
+id = "markdownmanual"
+repo = "modrinth"
+channel = "release"
+
+# Buttons wants this
+[[mod_list]]
+id = "owo-lib"
+repo = "modrinth"
+channel = "release"
+
 # Website with server
 [[mod_list]]
 id = "bluemap"
 repo = "modrinth"
 channel = "release"
+
 
 # Allows you to see very very far away
 # Removed until proper multiplayer support is added (likely next update)

@@ -19,3 +19,9 @@ zip = { workspace = true }
 bytes = { workspace = true }
 anyhow = { workspace = true }
 url_encor = { workspace = true }
+serde_json = { workspace = true }
+serde_repr = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+tracing = { workspace = true }
+crab_nbt = { workspace = true }
