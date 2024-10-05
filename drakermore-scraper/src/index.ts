@@ -132,6 +132,8 @@ function waitUntilDownload(page: puppeteer.Page): Promise<void> {
 	});
 }
 
+let modrinthCounter = 0;
+
 for (let i = 0; i < modListConfig.mod_list.length; i += 1) {
 	const mod = modListConfig.mod_list[i];
 	console.info("Downloading mod " + (i + 1) + "/" + modListConfig.mod_list.length);
@@ -147,6 +149,7 @@ for (let i = 0; i < modListConfig.mod_list.length; i += 1) {
 	await page.goto(downloadPageUrl);
 	switch (mod.repo) {
 		case "curseforge": {
+			modrinthCounter = 0;
 			const downloadSelector = `a[href^="/minecraft/mc-mods/${mod.id}/download/"]`;
 			// TODO: Prioritize new full releases over beta releases
 			const latestDownloadSelector = downloadSelector + `:is(.file-row:has(.channel-tag.${mod.channel}) a)`;
@@ -183,6 +186,13 @@ for (let i = 0; i < modListConfig.mod_list.length; i += 1) {
 			break;
 		}
 		case "modrinth": {
+			modrinthCounter += 1;
+			if (modrinthCounter > 4) {
+				console.log(`Visiting modrinth ${modrinthCounter} times in a row, this is usually where their bot protection kicks in`);
+				console.log("Gonna relax for 35 seconds");
+				await sleep(35353);
+				modrinthCounter = 0;
+			}
 			const downloadSelector = "a[href^=\"https://cdn.modrinth.com/data/\"][aria-label=\"Download\"]";
 			await page.waitForSelector(downloadSelector);
 			const modName = await page.$eval("h1", (el) => el.innerText);
@@ -205,6 +215,7 @@ for (let i = 0; i < modListConfig.mod_list.length; i += 1) {
 			const downloadPromise = waitUntilDownload(page);
 			await page.click(downloadSelector);
 			console.info("Waiting for download to complete...");
+			await sleep(500 + Math.random() * 2000);
 			await downloadPromise;
 			const [downloadFileName] = await fs.readdir(browserDownloadDir);
 			console.info("Downloaded file:", downloadFileName);

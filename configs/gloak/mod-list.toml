@@ -6,8 +6,12 @@ minecraft_version = "1.20.1"
 fabric_loader_version = "0.16.5"
 
 [[minecraft_servers]]
-name = "Test IP"
-ip = "clood-server.local"
+name = "Commune Server"
+ip = "minecraft.gloak.ca"
+
+[[minecraft_servers]]
+name = "Commune Server (Aritz's WiFi Only)"
+ip = "minecraft-commune.local"
 
 [[mmc_pack_components]]
 dependency_only = true
@@ -257,6 +261,41 @@ id = "tooltipfix"
 repo = "curseforge"
 channel = "release"
 
+[[mod_list]]
+id = "better-combat"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "wizards"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "paladins-and-priests"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "archers"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "rogues-and-warriors"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "jewelry"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "create-confectionery"
+repo = "curseforge"
+channel = "release"
+
 # Dependencies for chunk loaders
 [[mod_list]]
 id = "supermartijn642s-core-lib"
@@ -317,6 +356,49 @@ channel = "release"
 # Buttons wants this
 [[mod_list]]
 id = "owo-lib"
+repo = "modrinth"
+channel = "release"
+
+# Dependencies of "RPC Series", the extra combat classes etc.
+[[mod_list]]
+id = "azurelib-armor"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "ranged-weapon-api"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "spell-engine"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "runes"
+repo = "modrinth"
+channel = "release"
+
+# Dependencies of jewelry
+[[mod_list]]
+id = "trinkets"
+repo = "modrinth"
+channel = "release"
+
+# More transient dependencies
+[[mod_list]]
+id = "cloth-config"
+repo = "modrinth"
+channel = "release"
+
+[[mod_list]]
+id = "playeranimator"
+repo = "modrinth"
+channel = "beta"
+
+[[mod_list]]
+id = "spell-power"
 repo = "modrinth"
 channel = "release"
 

@@ -9,31 +9,8 @@ use axum::{
 };
 use bytes::Bytes;
 use lazy_regex::regex_replace_all;
-use serde::Serialize;
 use zip::ZipWriter;
 
-// Heavily inspired from https://docs.rs/axum/0.7.7/src/axum/json.rs.html#181
-pub struct TomlResponse<T> {
-	inner: T,
-}
-impl<T> TomlResponse<T> {
-	pub fn new(inner: T) -> Self {
-		Self { inner }
-	}
-}
-
-impl<T> IntoResponse for TomlResponse<T>
-where
-	T: Serialize,
-{
-	fn into_response(self) -> Response {
-		// Use a small initial capacity of 128 bytes like serde_json::to_vec
-		// https://docs.rs/serde_json/1.0.82/src/serde_json/ser.rs.html#2189
-		let mut output = String::with_capacity(128);
-		let serializer = toml::Serializer::pretty(&mut output);
-		ok_or_500_response(self.inner.serialize(serializer))
-	}
-}
 pub fn ok_or_500_response<T: IntoResponse, E: std::error::Error>(result: Result<T, E>) -> Response {
 	match result {
 		Ok(response) => response.into_response(),
