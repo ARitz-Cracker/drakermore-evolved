@@ -257,7 +257,7 @@ async fn get_pw_mod_metadata(AxumPath(mut jar_file_name_str): AxumPath<String>) 
 async fn get_pw_copy_metadata(AxumPath(mut copy_file_name_str): AxumPath<String>) -> Response {
 	ok_or_anyhow_response(
 		async {
-			if !copy_file_name_str.ends_with(".pw.toml") || !copy_file_name_str.starts_with("/packwiz/") {
+			if !copy_file_name_str.ends_with(".pw.toml") {
 				return Err(IoError::new(
 					IoErrorKind::NotFound,
 					format!("cannot find {copy_file_name_str} in this folder"),
@@ -265,9 +265,8 @@ async fn get_pw_copy_metadata(AxumPath(mut copy_file_name_str): AxumPath<String>
 				.into());
 			}
 			copy_file_name_str.truncate(copy_file_name_str.len() - "pw.toml".len());
-			let copy_file_name = PathBuf::from(copy_file_name_str.split_off("/packwiz/".len()));
-			let mut full_path = CLI_OPTIONS.config.clone();
-			full_path.push(copy_file_name);
+			let copy_file_name = PathBuf::from(copy_file_name_str.clone());
+			let full_path = CLI_OPTIONS.config.join(copy_file_name);
 			Ok(pw_copy_metadata_string(&full_path).await?)
 		}
 		.await,
