@@ -1,6 +1,6 @@
 [package]
 name = "drakermore-server"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [dependencies]
@@ -25,3 +25,5 @@ sha2 = { workspace = true }
 hex = { workspace = true }
 tracing = { workspace = true }
 crab_nbt = { workspace = true }
+tokio-stream.workspace = true
+tower-http.workspace = true

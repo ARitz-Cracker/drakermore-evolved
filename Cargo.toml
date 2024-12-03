@@ -3,8 +3,7 @@ resolver = "2"
 members = ["drakermore-server"]
 
 [workspace.dependencies]
-is_none_or = "0.1.0"                                                     # REMOVE THIS WHEN RUSTC 1.82.0 IS RELEASED!!!
-futures = "0.3.30"
+futures = "0.3.31"
 log = "0.4.22"
 lazy-regex = "3.3.0"
 thiserror = "1.0.64"
@@ -12,6 +11,8 @@ serde = { version = "1.0.210", features = ["derive"] }
 axum = { version = "0.7.7", features = ["macros"] }
 tracing-subscriber = "0.3.18"
 tokio = { version = "1.40.0", features = ["rt", "net", "macros", "fs"] }
+tokio-stream = {version = "0.1.16", features = ["fs"]}
+tower-http = {version = "0.6.2", features = ["fs"]}
 toml = "0.8.19"
 mime = "0.3.16"
 zip = "2.2.0"

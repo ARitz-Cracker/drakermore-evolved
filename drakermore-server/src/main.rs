@@ -16,6 +16,8 @@ use bpaf::Bpaf;
 use bytes::Bytes;
 use cached_hasher::get_hash_from_file;
 use crab_nbt::{Nbt, NbtCompound, NbtTag};
+use futures::StreamExt;
+use nested_dirs::subfiles_in_folder;
 use responses::{download_file_name_header, ok_or_anyhow_response, ZipResponse};
 use schemas::{
 	DrakermoreModConfig, MmcPack, PackwizFormatVersion, PackwizHashFormat, PackwizIndex, PackwizIndexFile,
@@ -23,6 +25,8 @@ use schemas::{
 };
 use sha2::{Digest, Sha512};
 use tokio::fs;
+use tokio_stream::wrappers::ReadDirStream;
+use tower_http::services::ServeDir;
 use zip::write::SimpleFileOptions;
 
 const PACKWIZ_INSTALLER_BOOTSTRAP_JAR: &'static [u8] =
@@ -31,6 +35,7 @@ const PACKWIZ_INSTALLER_BOOTSTRAP_JAR: &'static [u8] =
 mod cached_hasher;
 mod responses;
 mod schemas;
+mod nested_dirs;
 
 #[derive(Debug, Clone, Bpaf)]
 #[bpaf(options)]
@@ -38,6 +43,9 @@ pub struct CliOptions {
 	#[bpaf(short, long)]
 	/// Path to drakermore config file
 	pub config: PathBuf,
+	#[bpaf(short('D'), long)]
+	/// The folders in the specified folder will be copied to the user's .minecraft folder verbatim
+	pub copy_dir: PathBuf,
 	#[bpaf(short, long)]
 	/// Path to where the mods where downloaded by the scraper
 	pub download_dir: PathBuf,
@@ -50,7 +58,7 @@ pub struct CliOptions {
 }
 
 // CLI options as a LazyLock so it's accessible globally
-const CLI_OPTIONS: LazyLock<CliOptions> = LazyLock::new(|| {
+static CLI_OPTIONS: LazyLock<CliOptions> = LazyLock::new(|| {
 	let mut options = cli_options().run();
 	while options.url_prefix.ends_with('/') {
 		options.url_prefix.pop();
@@ -72,7 +80,8 @@ async fn main() -> anyhow::Result<()> {
 		.route("/jars/:side/:jar_file", get(get_mod_jar))
 		.route("/packwiz/pack.toml", get(get_pw_pack))
 		.route("/packwiz/index.toml", get(get_pw_index))
-		.route("/packwiz/mods/:jar_metadata", get(get_pw_mod_metadata));
+		.route("/packwiz/mods/:jar_metadata", get(get_pw_mod_metadata))
+		.nest_service("/copy_files", ServeDir::new(&CLI_OPTIONS.copy_dir));
 
 	// run our app with hyper, listening globally on port 3000
 	println!("Listening to {}...", CLI_OPTIONS.bind);
@@ -119,6 +128,22 @@ async fn pw_mod_metadata_string(realm: PackwizModSide, jar_file_name: PathBuf) -
 		side: realm,
 	})?)
 }
+async fn pw_copy_metadata_string(full_file_path: &Path) -> anyhow::Result<String> {
+	let file_name = full_file_path.file_name().unwrap_or_default().to_string_lossy();
+	let file_path = full_file_path.strip_prefix(&CLI_OPTIONS.copy_dir)?;
+	let file_path_str = file_path.to_string_lossy();
+
+	Ok(toml::to_string_pretty(&PackwizMod {
+		download: PackwizModDownload {
+			url: format!("{}/copy_files/{file_path_str}", &CLI_OPTIONS.url_prefix).into(),
+			hash_format: PackwizHashFormat::Sha512,
+			hash: Cow::Borrowed(&get_hash_from_file(&full_file_path).await?),
+		},
+		name: &file_name,
+		filename: file_name.clone(),
+		side: PackwizModSide::Client,
+	})?)
+}
 
 async fn pw_index_string() -> anyhow::Result<String> {
 	let mut jar_full_path = CLI_OPTIONS.download_dir.canonicalize()?;
@@ -143,6 +168,19 @@ async fn pw_index_string() -> anyhow::Result<String> {
 			});
 		}
 		jar_full_path.pop();
+	}
+	let mut copy_files = subfiles_in_folder(CLI_OPTIONS.copy_dir.clone(), true);
+	while let Some(full_file_path) = copy_files.next().await {
+		let full_file_path = full_file_path?;
+		let relative_file_path = full_file_path.strip_prefix(CLI_OPTIONS.copy_dir.clone())?;
+		result.push(PackwizIndexFile {
+			file: relative_file_path.to_string_lossy().into_owned().into(),
+			hash: hex::encode(Sha512::digest(
+				pw_copy_metadata_string(&full_file_path).await?,
+			))
+			.into(),
+			metafile: true,
+		});
 	}
 	Ok(toml::to_string_pretty(&PackwizIndex {
 		hash_format: PackwizHashFormat::Sha512,
