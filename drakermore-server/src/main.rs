@@ -81,6 +81,7 @@ async fn main() -> anyhow::Result<()> {
 		.route("/packwiz/pack.toml", get(get_pw_pack))
 		.route("/packwiz/index.toml", get(get_pw_index))
 		.route("/packwiz/mods/:jar_metadata", get(get_pw_mod_metadata))
+		.route("/packwiz/*copy_file_url", get(get_pw_copy_metadata))
 		.nest_service("/copy_files", ServeDir::new(&CLI_OPTIONS.copy_dir));
 
 	// run our app with hyper, listening globally on port 3000
@@ -174,7 +175,7 @@ async fn pw_index_string() -> anyhow::Result<String> {
 		let full_file_path = full_file_path?;
 		let relative_file_path = full_file_path.strip_prefix(CLI_OPTIONS.copy_dir.clone())?;
 		result.push(PackwizIndexFile {
-			file: relative_file_path.to_string_lossy().into_owned().into(),
+			file: format!("{}.pw.toml", relative_file_path.to_string_lossy()).into(),
 			hash: hex::encode(Sha512::digest(
 				pw_copy_metadata_string(&full_file_path).await?,
 			))
@@ -249,6 +250,25 @@ async fn get_pw_mod_metadata(AxumPath(mut jar_file_name_str): AxumPath<String>) 
 				jar_file_name,
 			)
 			.await?)
+		}
+		.await,
+	)
+}
+async fn get_pw_copy_metadata(AxumPath(mut copy_file_name_str): AxumPath<String>) -> Response {
+	ok_or_anyhow_response(
+		async {
+			if !copy_file_name_str.ends_with(".pw.toml") {
+				return Err(IoError::new(
+					IoErrorKind::NotFound,
+					format!("cannot find {copy_file_name_str} in this folder"),
+				)
+				.into());
+			}
+			copy_file_name_str.truncate(copy_file_name_str.len() - "pw.toml".len());
+			let copy_file_name = PathBuf::from(copy_file_name_str.clone());
+			let mut full_path = CLI_OPTIONS.config.clone();
+			full_path.push(copy_file_name);
+			Ok(pw_copy_metadata_string(&full_path).await?)
 		}
 		.await,
 	)
